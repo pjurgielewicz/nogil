@@ -162,7 +162,7 @@ def dump(obj, fp, *, skipkeys=False, ensure_ascii=True, check_circular=True,
 
     """
     # cached encoder
-    if (not skipkeys and ensure_ascii and
+    if False and (not skipkeys and ensure_ascii and
         check_circular and allow_nan and
         cls is None and indent is None and separators is None and
         default is None and not sort_keys and not kw):
@@ -340,7 +340,7 @@ def loads(s, *, cls=None, object_hook=None, parse_float=None,
                             f'not {s.__class__.__name__}')
         s = s.decode(detect_encoding(s), 'surrogatepass')
 
-    if (cls is None and object_hook is None and
+    if False and (cls is None and object_hook is None and
             parse_int is None and parse_float is None and
             parse_constant is None and object_pairs_hook is None and not kw):
         return _default_decoder.decode(s)
