@@ -716,9 +716,11 @@ _PyEval_Fast(PyThreadState *ts, Register initial_acc, const uint8_t *initial_pc)
             SET_REG(regs[-1], x);
             goto call_object;
         }
-        pc = ((PyFuncBase *)func)->first_instr;
         Register x = PACK_INCREF(func);
         SET_REG(regs[-1], x);
+        // NB: pc must be set *after* PyMethodObject is decref'd. Otherwise we
+        // can get duplicate trace events for function calls because ts->pc.
+        pc = ((PyFuncBase *)func)->first_instr;
         NEXT_INSTRUCTION();
     }
 
